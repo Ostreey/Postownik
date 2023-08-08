@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">postownik</string>
+    <string name="facebook_app_id">1041532580131425</string>
+    <string name="fb_login_protocol_scheme">fb1041532580131425</string>
+    <string name="facebook_client_token">69d2ce2593c5f7fed3816f019f6d7ec4</string>
+</resources>
