@@ -31,9 +31,8 @@ class SetupPage extends StatelessWidget {
             Material(
               elevation: 10,
               child: Container(
-                decoration: const BoxDecoration(
-
-                  color: FlexColor.blueM3LightPrimaryContainer,
+                decoration:  BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -62,8 +61,8 @@ class SetupPage extends StatelessWidget {
             Material(
               elevation: 10,
               child: Container(
-                decoration: const BoxDecoration(
-                  color: FlexColor.blueM3LightPrimaryContainer,
+                decoration:  BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -85,6 +84,9 @@ class SetupPage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             CustomButton(
                 text: "Dalej",
                 onPressed: () async {
@@ -98,7 +100,7 @@ class SetupPage extends StatelessWidget {
                   } catch (e) {
                     print(e.toString());
                   }
-                  context.push('/${HomePage.pageConfig.name}/${GeneratePostPage.pageConfig.name}');
+                  context.go('/${HomePage.pageConfig.name}/${GeneratePostPage.pageConfig.name}');
                 })
           ],
         ),

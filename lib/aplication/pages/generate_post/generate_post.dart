@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:postownik/aplication/core/constants.dart';
 import 'package:postownik/aplication/core/page_config.dart';
+import 'package:postownik/aplication/pages/common_widgets/custom_snackbar.dart';
+import 'package:postownik/aplication/pages/common_widgets/profile_pic.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common_widgets/custom_button.dart';
 import 'generate_post_provider.dart';
@@ -20,12 +24,21 @@ class GeneratePostPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncResponse = ref.watch(promptProvider);
-
+    ref.watch(sharedPreferencesProvider);
+    ref.listen(publishOnFbPageProvider, (previous, next) {
+      if (next is AsyncError){
+        CustomSnackbar.show(context, next.error.toString());
+      }
+    });
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Align(alignment: Alignment.center, child: Text("Postownik")),
+          title:  Text(ref.watch(pageNameProvider)),
+          actions: [
+      ProfilePic(URL: ref.watch(userPicUrlProvider), size: 50)
+          ],
+
         ),
         body: Container(
           margin: EdgeInsets.symmetric(
@@ -35,6 +48,7 @@ class GeneratePostPage extends ConsumerWidget {
           child: Column(
             children: [
               PromptWidget(promptController: _promptController),
+              SizedBox(height: 20,),
               CustomButton(
                 isLoading: asyncResponse.isLoading,
                 text: "Generuj post",
@@ -43,6 +57,10 @@ class GeneratePostPage extends ConsumerWidget {
                 },
               ),
               ResponseWidget(),
+              SizedBox(height: 20,),
+              CustomButton(text: "Udostępnij na Facebook", onPressed: (){
+                  ref.read(publishOnFbPageProvider.notifier).publish();
+              })
             ],
           ),
         ),

@@ -30,6 +30,13 @@ dependencies:
   flutter_adaptive_scaffold: ^0.1.5
   flutter_facebook_auth: ^6.0.1
   http: ^1.1.0
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  get_it: ^7.6.0
+  mockito: ^5.4.2
+  cached_network_image: ^3.2.3
+
+  freezed_annotation: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -39,12 +46,18 @@ dev_dependencies:
   riverpod_generator: ^2.2.3
   build_runner: ^2.4.5
   flutter_lints: ^2.0.0
+  freezed: ^2.4.1
+  json_serializable: ^6.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/blank_profile_pic.jpg
+    - assets/logo_postownik.png
+    - assets/logo2.png
 
 
   uses-material-design: true

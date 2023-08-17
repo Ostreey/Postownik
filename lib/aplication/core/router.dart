@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postownik/aplication/core/go_router_observer.dart';
 import 'package:postownik/aplication/pages/facebook_login/facebook_login.dart';
+import 'package:postownik/aplication/pages/facebook_pages/facebook_pages_page.dart';
 import 'package:postownik/aplication/pages/generate_image_page/generate_image_page.dart';
 import 'package:postownik/aplication/pages/home_page/home_page.dart';
 
@@ -47,5 +48,10 @@ final routes = GoRouter(
           path: '/facebook_login',
           builder: (context, state) {
             return FacebookLogin();
+          }),
+      GoRoute(
+          path: '/facebook_pages',
+          builder: (context, state) {
+            return FacebookPagesPage();
           }),
     ]);
