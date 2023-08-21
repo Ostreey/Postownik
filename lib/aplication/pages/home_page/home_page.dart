@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
+import 'package:postownik/aplication/pages/common_widgets/profile_pic.dart';
 import 'package:postownik/aplication/pages/generate_post/generate_post.dart';
+import 'package:postownik/aplication/pages/home_page/widgets/custom_app_bar.dart';
 import 'package:postownik/aplication/pages/setup_page/setup_page.dart';
 
 import '../../core/page_config.dart';
 import '../generate_image_page/generate_image_page.dart';
+import 'widgets/custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -43,6 +46,8 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      appBar: CustomAppBar(),
+      drawer:  CustomDrawer(theme: theme),
       body: SafeArea(
           child: AdaptiveLayout(
         primaryNavigation: SlotLayout(
@@ -96,3 +101,5 @@ class _HomePageState extends State<HomePage> {
       'tab': HomePage.tabs[index].name,
     },
   );}
+
+

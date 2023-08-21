@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:postownik/aplication/pages/common_widgets/custom_button.dart';
 
 import '../generate_post_provider.dart';
 
@@ -13,17 +14,7 @@ class _ResponseWidgetState extends ConsumerState<ResponseWidget> {
 
   final TextEditingController _responseController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _responseController.addListener(_onResponseTextChanged);
-  }
 
-  void _onResponseTextChanged() {
-    final String newText = _responseController.text;
-    debugPrint("text controller: $newText");
-    ref.read(postMessageProvider.notifier).state = newText;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +25,20 @@ class _ResponseWidgetState extends ConsumerState<ResponseWidget> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Something went wrong!")));
       }
     });
-    return TextField(
-      decoration: const InputDecoration(
-        labelText: "Wygenerowana odpowiedź"
-      ),
-      maxLines: 8,
-      controller: _responseController,
+    return Column(
+      children: [
+        TextField(
+          decoration: const InputDecoration(
+            labelText: "Wygenerowana odpowiedź"
+          ),
+          maxLines: 8,
+          controller: _responseController,
+        ),
+        SizedBox(height: 20,),
+        CustomButton(text: "Udostępnij na Facebook", onPressed: (){
+          ref.read(publishOnFbPageProvider.notifier).publish(_responseController.text);
+        })
+      ],
     );
   }
 }

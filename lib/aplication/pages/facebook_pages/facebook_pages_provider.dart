@@ -21,8 +21,8 @@ Future<FbPagesEntity> facebookPages(FacebookPagesRef ref) async {
 @riverpod
 class saveToSharedPreffsTwo extends _$saveToSharedPreffsTwo {
   @override
-  Future<void> build() async {}
-
+  FutureOr<void> build() {
+  }
   Future<void> execute(FbPageProperties page) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {

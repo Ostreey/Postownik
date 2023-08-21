@@ -33,35 +33,26 @@ class GeneratePostPage extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title:  Text(ref.watch(pageNameProvider)),
-          actions: [
-      ProfilePic(URL: ref.watch(userPicUrlProvider), size: 50)
-          ],
-
-        ),
-        body: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: size.width / 20,
-            vertical: size.width / 15,
-          ),
-          child: Column(
-            children: [
-              PromptWidget(promptController: _promptController),
-              SizedBox(height: 20,),
-              CustomButton(
-                isLoading: asyncResponse.isLoading,
-                text: "Generuj post",
-                onPressed: () {
-                  ref.read(promptProvider.notifier).generate(_promptController.text);
-                },
-              ),
-              ResponseWidget(),
-              SizedBox(height: 20,),
-              CustomButton(text: "Udostępnij na Facebook", onPressed: (){
-                  ref.read(publishOnFbPageProvider.notifier).publish();
-              })
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: size.width / 20,
+              vertical: size.width / 15,
+            ),
+            child: Column(
+              children: [
+                PromptWidget(promptController: _promptController),
+                SizedBox(height: 20,),
+                CustomButton(
+                  isLoading: asyncResponse.isLoading,
+                  text: "Generuj post",
+                  onPressed: () {
+                    ref.read(promptProvider.notifier).generate(_promptController.text);
+                  },
+                ),
+                ResponseWidget(),
+              ],
+            ),
           ),
         ),
       ),

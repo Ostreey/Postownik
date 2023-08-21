@@ -20,12 +20,11 @@ final pageNameProvider = AutoDisposeNotifierProvider<pageName, String>.internal(
 );
 
 typedef _$pageName = AutoDisposeNotifier<String>;
-String _$userPicUrlHash() => r'f607741ee47df9a04e96180495b3fd23569ba251';
+String _$userPicUrlHash() => r'af8868be459d65416f6a4314a46b38e1e185b00b';
 
 /// See also [userPicUrl].
 @ProviderFor(userPicUrl)
-final userPicUrlProvider =
-    AutoDisposeNotifierProvider<userPicUrl, String>.internal(
+final userPicUrlProvider = NotifierProvider<userPicUrl, String>.internal(
   userPicUrl.new,
   name: r'userPicUrlProvider',
   debugGetCreateSourceHash:
@@ -34,7 +33,7 @@ final userPicUrlProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$userPicUrl = AutoDisposeNotifier<String>;
+typedef _$userPicUrl = Notifier<String>;
 String _$publishOnFbPageHash() => r'9aefbbe462690cfa0f7cdc4843f18f6ed3e08ee5';
 
 /// See also [publishOnFbPage].

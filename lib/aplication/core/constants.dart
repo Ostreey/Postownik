@@ -1,6 +1,8 @@
 
+import 'package:postownik/env/env.dart';
+
 class Constants{
-  static const String openAiApiKey = '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';
+  static  String get openAiApiKey => Env.openAiKey;
     static const String preffsFbAccessToken = 'FB_ACCESS_TOKEN';
   static const String preffsFbUserId = 'FB_USER_ID';
   static const String preffsFbUserPicUrl = 'FB_USER_PIC_URL';
