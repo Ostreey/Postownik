@@ -9,15 +9,20 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final urlPic = ref.watch(userPicUrlProvider);
+    final companyName = ref.watch(pageNameProvider);
+    debugPrint("urlPic: $urlPic");
+    debugPrint("companyName: $companyName");
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Text("Postownik"),
+      title: Text(companyName),
       actions: [
         GestureDetector(
           onTap: () =>  Scaffold.of(context).openDrawer(),
-            child: ProfilePic(URL: ref.watch(userPicUrlProvider), size: 50)
+            child: ProfilePic(URL: urlPic , size: 50)
         ),
       ],
     );

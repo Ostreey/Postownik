@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:postownik/aplication/core/constants.dart';
@@ -49,14 +51,43 @@ class FbLogin extends _$FbLogin {
       final LoginResult result = await FacebookAuth.instance.login();
       final userData = await FacebookAuth.instance.getUserData();
       final FbUserDataEntity fbUserDataEntity = FbUserDataEntity(
-          picUrl: userData['picture']['data']['url'], name: userData['name'], picHeight: 'picHeight', picWidth: 'picWidth');
+          picUrl: userData['picture']['data']['url'],
+          name: userData['name'],
+          picHeight: 'picHeight',
+          picWidth: 'picWidth');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       debugPrint(fbUserDataEntity.picUrl);
+
+      final facebookAuthCredential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      final firebaseResult = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+      debugPrint("Login to firebase succesful");
+      final userUuid = FirebaseAuth.instance.currentUser!.uid;
+      final userDoc =
+          FirebaseFirestore.instance.collection('users').doc(userUuid);
+
+      final userSnapshot = await userDoc.get();
+      if (!userSnapshot.exists) {
+        debugPrint("User created");
+        final Map<String, dynamic> facebookPages = {
+        };
+
+        userDoc.set({
+          'name': fbUserDataEntity.name,
+          'picUrl': fbUserDataEntity.picUrl,
+          'email': firebaseResult.user!.email,
+          "credits": 10,
+          'facebookPages': facebookPages,
+        });
+      }
 
       prefs.setString(Constants.preffsFbAccessToken, result.accessToken!.token);
       prefs.setString(Constants.preffsFbUserId, result.accessToken!.userId!);
       prefs.setString(Constants.preffsFbUserName, fbUserDataEntity.name);
       prefs.setString(Constants.preffsFbUserPicUrl, fbUserDataEntity.picUrl);
+      prefs.setString(Constants.preffsFireStoreUserUuid, userUuid);
+
       return result;
     });
   }

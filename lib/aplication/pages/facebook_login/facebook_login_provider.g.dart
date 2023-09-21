@@ -22,7 +22,7 @@ final longLiveTokenProvider =
 );
 
 typedef _$longLiveToken = AutoDisposeAsyncNotifier<void>;
-String _$fbLoginHash() => r'ce5094eee5876029232ae9758d8bb2c857482102';
+String _$fbLoginHash() => r'f1d116c4878188581ba0c089f608b6b9f93f5cfb';
 
 /// See also [FbLogin].
 @ProviderFor(FbLogin)

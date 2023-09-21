@@ -16,3 +16,4 @@ class GeneralFailure extends Failure with EquatableMixin {
   @override
   List<Object?> get props => [];
 }
+

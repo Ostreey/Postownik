@@ -25,8 +25,15 @@ class GeneratePostPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncResponse = ref.watch(promptProvider);
     ref.watch(sharedPreferencesProvider);
+    ref.listen(promptProvider, (previous, next) {
+      if (next is AsyncError){
+      debugPrintStack();
+        CustomSnackbar.show(context, next.error.toString());
+      }
+    });
     ref.listen(publishOnFbPageProvider, (previous, next) {
       if (next is AsyncError){
+        debugPrintStack();
         CustomSnackbar.show(context, next.error.toString());
       }
     });

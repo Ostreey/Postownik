@@ -12,12 +12,16 @@ import 'package:postownik/aplication/pages/setup_page/setup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../injection.dart';
+import '../../core/page_config.dart';
 import '../common_widgets/profile_pic.dart';
+import '../generate_post/generate_post.dart';
 
 
 
 class FacebookLogin extends ConsumerStatefulWidget {
   const FacebookLogin({Key? key}) : super(key: key);
+
+  static final pageConfig = PageConfig(icon: Icons.post_add, name: "login", child: FacebookLogin());
 
   @override
   _FacebookLoginState createState() => _FacebookLoginState();
@@ -42,6 +46,7 @@ class _FacebookLoginState extends ConsumerState<FacebookLogin> {
         context.pushReplacement("/facebook_pages");
       }
       if(next is AsyncError){
+        debugPrintStack();
         CustomSnackbar.show(context, next.error.toString());
       }
     });

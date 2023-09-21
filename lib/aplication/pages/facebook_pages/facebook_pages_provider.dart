@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:postownik/aplication/core/constants.dart';
 import 'package:postownik/aplication/pages/generate_post/generate_post_provider.dart';
@@ -26,6 +27,7 @@ class saveToSharedPreffsTwo extends _$saveToSharedPreffsTwo {
   Future<void> execute(FbPageProperties page) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
+      debugPrint("saveToSharedPreffsTwo: ${page.name}");
       final preffs = await SharedPreferences.getInstance();
       preffs.setString(Constants.preffsFbManagedPageId, page.id);
       preffs.setString(Constants.preffsFbManagedPageName, page.name);

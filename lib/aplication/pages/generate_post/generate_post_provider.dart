@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:langchain/langchain.dart';
 import 'package:langchain_openai/langchain_openai.dart';
 import 'package:postownik/domain/repositories/facebook_repository.dart';
+import 'package:postownik/domain/usecases/ai_content_usecase.dart';
 import 'package:postownik/env/env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,17 +15,18 @@ import '../../core/constants.dart';
 part 'generate_post_provider.g.dart';
 
 final sharedPreferencesProvider =
-    FutureProvider<SharedPreferences>((ref) async {
+    FutureProvider.autoDispose<SharedPreferences>((ref) async {
   final preffs = await SharedPreferences.getInstance();
   final userPicUrl =
       preffs.getString(Constants.preffsFbManagedPagePicUrl) ?? '';
   final pageName = preffs.getString(Constants.preffsFbManagedPageName) ?? '';
   ref.read(pageNameProvider.notifier).state = pageName;
   ref.read(userPicUrlProvider.notifier).state = userPicUrl;
+  debugPrint("sharedPreferencesProvider: ${pageName}");
   return preffs;
 });
 
-@riverpod
+@Riverpod(keepAlive: true)
 class pageName extends _$pageName {
   @override
   String build() => '';
@@ -71,32 +75,7 @@ class prompt extends _$prompt {
   Future<void> generate(String prompt) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String companySpecialization =
-          prefs.getString('company_specialization') ?? 'przykladowa firma';
-      String companyName = prefs.getString('company_name') ?? 'nazwa firmy';
-
-      final chat = OpenAI(apiKey: Env.openAiKey, temperature: 0.9);
-      const template =
-          'Jesteś profesjonalnym menadżerem mediów społecznościowych, '
-          'Twoim klientem jest {company_specialization} o nazwie {company_name}.'
-          ' Stworz gotowa do opublikowania tresc posta na media spolecznosciowe o tematyce:';
-      final systemMessagePrompt =
-          SystemChatMessagePromptTemplate.fromTemplate(template);
-      const humanTemplate = '{text}';
-      final humanMessagePrompt =
-          HumanChatMessagePromptTemplate.fromTemplate(humanTemplate);
-
-      final chatPrompt = ChatPromptTemplate.fromPromptMessages(
-          [systemMessagePrompt, humanMessagePrompt]);
-      final formattedPrompt = chatPrompt.formatPrompt({
-        'company_specialization': companySpecialization,
-        'company_name': companyName,
-        'text': prompt
-      }).toChatMessages();
-      final aiMsg = await chat.predictMessages(formattedPrompt);
-      final response = aiMsg.content.split("System: ")[0];
-      print(aiMsg.content);
+     final response = AiContentUseCase().generateText(prompt);
       return response;
     });
   }

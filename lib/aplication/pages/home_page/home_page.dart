@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               key: const Key('primary-navigation-medium'),
               builder: (context) => AdaptiveScaffold.standardNavigationRail(
                 trailing: IconButton(onPressed: (){
-                  context.pushNamed(SetupPage.pageConfig.name);
+                  context.pushNamed("/setup_page");
                 }, icon: Icon(Icons.settings)),
                 onDestinationSelected: (index) => _tapOnNavigationDestination(context, index),
                 selectedIndex: widget.index,

@@ -6,11 +6,11 @@ part of 'generate_post_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$pageNameHash() => r'bd1ad730def938a774d54dccb93db22155c2fd38';
+String _$pageNameHash() => r'1fba404f2ccce7e971bb5e0cf37a0f40f9a49a8d';
 
 /// See also [pageName].
 @ProviderFor(pageName)
-final pageNameProvider = AutoDisposeNotifierProvider<pageName, String>.internal(
+final pageNameProvider = NotifierProvider<pageName, String>.internal(
   pageName.new,
   name: r'pageNameProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final pageNameProvider = AutoDisposeNotifierProvider<pageName, String>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$pageName = AutoDisposeNotifier<String>;
+typedef _$pageName = Notifier<String>;
 String _$userPicUrlHash() => r'af8868be459d65416f6a4314a46b38e1e185b00b';
 
 /// See also [userPicUrl].
@@ -34,7 +34,7 @@ final userPicUrlProvider = NotifierProvider<userPicUrl, String>.internal(
 );
 
 typedef _$userPicUrl = Notifier<String>;
-String _$publishOnFbPageHash() => r'9aefbbe462690cfa0f7cdc4843f18f6ed3e08ee5';
+String _$publishOnFbPageHash() => r'4ef0842c99903a66468b7b7b471fd5e9c3747940';
 
 /// See also [publishOnFbPage].
 @ProviderFor(publishOnFbPage)
@@ -64,12 +64,12 @@ final postMessageProvider = NotifierProvider<postMessage, String>.internal(
 );
 
 typedef _$postMessage = Notifier<String>;
-String _$promptHash() => r'dac7776c947e68ffe71602a3fee65392d43c3b92';
+String _$promptHash() => r'58f55708b3ff652f56e97820f56efe621a9fc209';
 
 /// See also [prompt].
 @ProviderFor(prompt)
 final promptProvider =
-    AutoDisposeAsyncNotifierProvider<prompt, String>.internal(
+    AutoDisposeAsyncNotifierProvider<prompt, dynamic>.internal(
   prompt.new,
   name: r'promptProvider',
   debugGetCreateSourceHash:
@@ -78,6 +78,6 @@ final promptProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$prompt = AutoDisposeAsyncNotifier<String>;
+typedef _$prompt = AutoDisposeAsyncNotifier<dynamic>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

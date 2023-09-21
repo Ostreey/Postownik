@@ -22,7 +22,7 @@ final facebookPagesProvider = AutoDisposeFutureProvider<FbPagesEntity>.internal(
 
 typedef FacebookPagesRef = AutoDisposeFutureProviderRef<FbPagesEntity>;
 String _$saveToSharedPreffsTwoHash() =>
-    r'5b896e818ad87ff5dd6c82200d477215a5abaa97';
+    r'fc218e86b2230e474cff7fe3e308f4ee0d686cbd';
 
 /// See also [saveToSharedPreffsTwo].
 @ProviderFor(saveToSharedPreffsTwo)

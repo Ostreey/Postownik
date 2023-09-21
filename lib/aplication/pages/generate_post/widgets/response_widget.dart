@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postownik/aplication/pages/common_widgets/custom_button.dart';
 
+import '../../common_widgets/custom_snackbar.dart';
 import '../generate_post_provider.dart';
 
 
@@ -19,10 +20,13 @@ class _ResponseWidgetState extends ConsumerState<ResponseWidget> {
   @override
   Widget build(BuildContext context) {
     ref.watch(promptProvider).whenData((value) => _responseController.text = value.toString());
-    ref.listen(promptProvider, (previous, next) {
+    ref.listen(publishOnFbPageProvider, (previous, next) {
+      if(next is AsyncData){
+        CustomSnackbar.show(context, "Post opublikowany na Facebooku");
+      }
       if(next is AsyncError){
-        print(next.error.toString());
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Something went wrong!")));
+        debugPrint(next.error.toString());
+        CustomSnackbar.show(context, next.error.toString());
       }
     });
     return Column(
@@ -35,7 +39,10 @@ class _ResponseWidgetState extends ConsumerState<ResponseWidget> {
           controller: _responseController,
         ),
         SizedBox(height: 20,),
-        CustomButton(text: "Udostępnij na Facebook", onPressed: (){
+        CustomButton(
+            isLoading: ref.watch(publishOnFbPageProvider).isLoading,
+            text: "Udostępnij na Facebook",
+            onPressed: (){
           ref.read(publishOnFbPageProvider.notifier).publish(_responseController.text);
         })
       ],

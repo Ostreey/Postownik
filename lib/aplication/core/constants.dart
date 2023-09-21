@@ -8,9 +8,16 @@ class Constants{
   static const String preffsFbUserPicUrl = 'FB_USER_PIC_URL';
   static const String preffsFbUserName = 'FB_USER_NAME';
 
+  //Current settings
+  static const String preffsCompanySpecialization  = 'COMPANY_SPECIALIZATION';
+  static const String preffsCompanyName  = 'COMPANY_NAME';
+
   //PAGES
   static const String preffsFbManagedPageName = 'FB_MANAGED_PAGE_NAME';
   static const String preffsFbManagedPagePicUrl = 'FB_MANAGED_PAGE_PIC_URL';
   static const String preffsFbManagedPageId = 'FB_MANAGED_PAGE_ID';
   static const String preffsFbManagedPageAccessToken = 'FB_MANAGED_ACCESS_TOKEN';
+
+  //FIREBASE
+  static const String preffsFireStoreUserUuid = 'USER_UUID';
 }
