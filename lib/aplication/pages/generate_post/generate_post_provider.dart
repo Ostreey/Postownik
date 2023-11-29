@@ -54,6 +54,7 @@ class publishOnFbPage extends _$publishOnFbPage {
           prefs.getString(Constants.preffsFbManagedPageAccessToken) ?? '';
       String pageId = prefs.getString(Constants.preffsFbManagedPageId) ?? '';
       debugPrint("PUBLISH TEST: $postContent");
+      debugPrint(accessToken);
       final response = await repository.publishPostOnFbPage(
           accessToken, pageId, postContent);
       return response;

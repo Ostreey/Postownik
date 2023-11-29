@@ -64,12 +64,12 @@ final postMessageProvider = NotifierProvider<postMessage, String>.internal(
 );
 
 typedef _$postMessage = Notifier<String>;
-String _$promptHash() => r'58f55708b3ff652f56e97820f56efe621a9fc209';
+String _$promptHash() => r'7ccd3f043ac8abcaa7838621af35e1bcb40611c1';
 
 /// See also [prompt].
 @ProviderFor(prompt)
 final promptProvider =
-    AutoDisposeAsyncNotifierProvider<prompt, dynamic>.internal(
+    AutoDisposeAsyncNotifierProvider<prompt, String>.internal(
   prompt.new,
   name: r'promptProvider',
   debugGetCreateSourceHash:
@@ -78,6 +78,6 @@ final promptProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$prompt = AutoDisposeAsyncNotifier<dynamic>;
+typedef _$prompt = AutoDisposeAsyncNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

@@ -32,6 +32,7 @@ class saveToSharedPreffsTwo extends _$saveToSharedPreffsTwo {
       preffs.setString(Constants.preffsFbManagedPageId, page.id);
       preffs.setString(Constants.preffsFbManagedPageName, page.name);
       preffs.setString(Constants.preffsFbManagedPagePicUrl, page.picUrl);
+      preffs.setString(Constants.preffsFbManagedPageAccessToken, page.pageAccessToken);
     });
   }
 }

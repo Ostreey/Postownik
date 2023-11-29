@@ -6,9 +6,9 @@ part 'env.g.dart';
 @Envied(path: 'locks.env')
 abstract class Env {
   @EnviedField(varName: 'openAiKey', obfuscate: true)
-  static final openAiKey = _Env.openAiKey;
+   static String openAiKey = _Env.openAiKey;
   @EnviedField(varName: 'fbAppId', obfuscate: true)
-  static final fbAppId = _Env.fbAppId;
+  static String fbAppId = _Env.fbAppId;
   @EnviedField(varName: 'fbSecret', obfuscate: true)
-  static final fbSecret = _Env.fbSecret;
+  static String fbSecret = _Env.fbSecret;
 }
